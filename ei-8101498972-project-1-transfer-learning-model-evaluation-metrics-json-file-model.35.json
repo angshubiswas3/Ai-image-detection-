@@ -1,0 +1,50 @@
+import json
+from pprint import pprint
+
+data = {
+    "int8": {
+        "accuracy": 0.5333,
+        "roc_auc": 0.8267,
+        "loss": 1.0289,
+        "confusion_matrix": [
+            [5, 0, 0],
+            [1, 1, 3],
+            [3, 0, 2]
+        ]
+    },
+    "float32_train": {
+        "accuracy": 0.9333,
+        "roc_auc": 1.0,
+        "loss": 0.2017,
+        "confusion_matrix": [
+            [5, 0, 0],
+            [0, 5, 0],
+            [1, 0, 4]
+        ]
+    },
+    "float32_test": {
+        "accuracy": 0.7222,
+        "roc_auc": 0.9444,
+        "loss": 0.4862,
+        "confusion_matrix": [
+            [5, 0, 1],
+            [0, 4, 2],
+            [2, 0, 4]
+        ]
+    }
+}
+
+def print_section(title, model):
+    print("\n======================")
+    print(title)
+    print("======================")
+    print(f"Accuracy        : {model['accuracy'] * 100:.2f}%")
+    print(f"ROC AUC         : {model['roc_auc']:.4f}")
+    print(f"Loss            : {model['loss']:.4f}")
+    print("Confusion Matrix:")
+    for row in model["confusion_matrix"]:
+        print(" ", row)
+
+print_section("INT8 Model Performance", data["int8"])
+print_section("Float32 (Training) Performance", data["float32_train"])
+print_section("Float32 (Test) Performance", data["float32_test"])
